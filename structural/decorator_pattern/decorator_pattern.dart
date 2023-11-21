@@ -43,9 +43,9 @@ class SMSDecorator extends BaseDecorator {
 
 void client() {
   var slack = SlackDecorator(decoratorName: 'Slack', notifier: NotifierImpl());
-  var sms = SMSDecorator(decoratorName: 'sms', notifier: slack);
+  var smsWithSlack = SMSDecorator(decoratorName: 'sms', notifier: slack);
   slack.notify();
-  sms.notify();
+  smsWithSlack.notify();
 }
 
 void main() {
