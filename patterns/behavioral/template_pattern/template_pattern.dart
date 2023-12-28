@@ -1,5 +1,3 @@
-import '../../creational/factory_method/factory_method.dart';
-
 abstract class CartTemplate {
   // the skeletion method.
   Future<void> processOrder(Cart cart) async {
