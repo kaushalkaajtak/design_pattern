@@ -2,12 +2,12 @@ import '../../creational/factory_method/factory_method.dart';
 
 abstract class CartTemplate {
   // the skeletion method.
-  Future<void> processOrder(User user, Cart cart) async {
+  Future<void> processOrder(Cart cart) async {
     print('------------------- $this-----------------');
     await validateCart(cart);
     calculateShipping(cart);
-    collectPayment(user, cart);
-    confirmOrder(user, cart);
+    collectPayment(cart);
+    confirmOrder(cart);
     print('------------------- end -----------------');
   }
 
@@ -17,8 +17,8 @@ abstract class CartTemplate {
   }
 
   Future<double> calculateShipping(Cart cart);
-  Future<void> collectPayment(User user, Cart cart);
-  Future<void> confirmOrder(User user, Cart cart);
+  Future<void> collectPayment(Cart cart);
+  Future<void> confirmOrder(Cart cart);
 }
 
 class Cart {}
@@ -30,6 +30,9 @@ class GuestUser extends User {}
 class RegisteredUser extends User {}
 
 class GuestUserCart extends CartTemplate {
+  final GuestUser user;
+
+  GuestUserCart({required this.user});
   @override
   Future<double> calculateShipping(Cart cart) async {
     print('ask for location');
@@ -38,18 +41,21 @@ class GuestUserCart extends CartTemplate {
   }
 
   @override
-  Future<void> collectPayment(User user, Cart cart) async {
+  Future<void> collectPayment(Cart cart) async {
     print('Ask for payment detials');
     print('make the payment');
   }
 
   @override
-  Future<void> confirmOrder(User user, Cart cart) async {
+  Future<void> confirmOrder(Cart cart) async {
     print('confirm the order');
   }
 }
 
 class RegisteredUserCart extends CartTemplate {
+  final RegisteredUser user;
+
+  RegisteredUserCart({required this.user});
   @override
   Future<double> calculateShipping(Cart cart) async {
     print('ask for saved locations if any');
@@ -59,22 +65,22 @@ class RegisteredUserCart extends CartTemplate {
   }
 
   @override
-  Future<void> collectPayment(User user, Cart cart) async {
+  Future<void> collectPayment(Cart cart) async {
     print('Ask detials from saved section');
     print('make the payment');
   }
 
   @override
-  Future<void> confirmOrder(User user, Cart cart) async {
+  Future<void> confirmOrder(Cart cart) async {
     print('confirm the order');
   }
 }
 
+Future<void> client(CartTemplate template) async {
+  await template.processOrder(Cart());
+}
+
 void main() async {
-  var cart = GuestUserCart();
-
-  await cart.processOrder(GuestUser(), Cart());
-
-  var newcart = RegisteredUserCart();
-  await newcart.processOrder(RegisteredUser(), Cart());
+  await client(GuestUserCart(user: GuestUser()));
+  await client(RegisteredUserCart(user: RegisteredUser()));
 }
