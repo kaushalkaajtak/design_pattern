@@ -1,4 +1,4 @@
-### Strategy Pattern
+## Strategy Pattern
 
 ### About
 When you have multiple implements / algorithms of an operation and you want to use them interchangeably without altering the structure of the code.
