@@ -4,7 +4,7 @@
 // But if we use sealed instead of interface at that time
 // we are sure of all the type of implementations of element.
 
-// now another problem is that we cant force to 
+// now another problem is that we cant force to
 // implement new elements if we dont use switch case.
 
 // sealed modifer may make sure no client is avle to extend or implement new elements
@@ -123,4 +123,44 @@ void main() {
 
   series.accept(barChartVisitor);
   series.accept(lineGraphVisitor);
+}
+
+abstract class MapPOint {
+  void exportXML();
+  void exportRaw();
+  void exportJson();
+}
+
+class Hospital extends MapPOint {
+  @override
+  void exportJson() {
+    // TODO: implement exportJson
+  }
+
+  @override
+  void exportRaw() {
+    // TODO: implement exportRaw
+  }
+
+  @override
+  void exportXML() {
+    // TODO: implement exportXML
+  }
+}
+
+class School implements MapPOint {
+  @override
+  void exportRaw() {
+    // TODO: implement exportRaw
+  }
+
+  @override
+  void exportXML() {
+    // TODO: implement exportXML
+  }
+  
+  @override
+  void exportJson() {
+    // TODO: implement exportJson
+  }
 }
