@@ -4,7 +4,11 @@
 // But if we use sealed instead of interface at that time
 // we are sure of all the type of implementations of element.
 
-// now another p
+// now another problem is that we cant force to 
+// implement new elements if we dont use switch case.
+
+// sealed modifer may make sure no client is avle to extend or implement new elements
+// but still it can't make sure that use is not using the switch case.
 
 // Visitor interface
 abstract class ChartVisitor {
