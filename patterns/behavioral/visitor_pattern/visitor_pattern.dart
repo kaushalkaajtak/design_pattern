@@ -5,24 +5,28 @@ abstract class ChartVisitor {
   void visitChart(Chart chart);
 }
 
+// base element which accepts a visitor
+abstract interface class Element {
+  void accept(ChartVisitor visitor);
+}
+
 // Concrete visitor for generating a bar chart
 class BarChartVisitor implements ChartVisitor {
   final List<List<String>> data = [];
 
   @override
   void visitDataPoint(DataPoint point) {
-    data.add([point.x.toString(), point.y.toString()]);
+    print('Visited data point');
   }
 
   @override
   void visitSeries(Series series) {
-    // Add customization for series (colors, labels)
+    print('Visited series');
   }
 
   @override
   void visitChart(Chart chart) {
-    // Generate the bar chart using a library like charts_flutter
-    // (specific implementation omitted for brevity)
+    print('Visited chart');
   }
 }
 
@@ -30,50 +34,67 @@ class LineGraphVisitor implements ChartVisitor {
   List<List<double>> data = [];
   @override
   void visitChart(Chart chart) {
-    // TODO: implement visitChart
+    print('Visited chart');
   }
 
   @override
   void visitDataPoint(DataPoint point) {
-    data.add([point.x, point.y]);
+    print('Visited data point');
   }
 
   @override
   void visitSeries(Series series) {
-    // TODO: implement visitSeries
+    print('Visited series');
   }
 }
 
 // Element classes
-class DataPoint {
+class DataPoint implements Element {
   final dynamic x, y;
 
   DataPoint(this.x, this.y);
 
-  void accept(ChartVisitor visitor) => visitor.visitDataPoint(this);
+  @override
+  void accept(ChartVisitor visitor) {
+    print('accepted $visitor');
+    visitor.visitDataPoint(this);
+  }
 }
 
-class Series {
+class Series implements Element {
   final String name;
   final List<DataPoint> points;
 
   Series(this.name, this.points);
 
-  void accept(ChartVisitor visitor) => visitor.visitSeries(this);
+  @override
+  void accept(ChartVisitor visitor) {
+    print('accepted $visitor');
+    visitor.visitSeries(this);
+  }
 }
 
-class Chart {
+class Chart implements Element {
   final String title;
   final List<Series> seriesList;
 
   Chart(this.title, this.seriesList);
 
-  void accept(ChartVisitor visitor) => visitor.visitChart(this);
+  @override
+  void accept(ChartVisitor visitor) {
+    print('accepted $visitor');
+    visitor.visitChart(this);
+  }
 }
 
 // Usage
 
 void main() {
+  // initializing differnt visitors
+  final barChartVisitor = BarChartVisitor();
+  final lineGraphVisitor = LineGraphVisitor();
+
+  // setting up different elements
   final chart = Chart(
     'Sales Data',
     [
@@ -89,10 +110,12 @@ void main() {
       ]),
     ],
   );
+  final series = Series('some ', [DataPoint(0, 1), DataPoint(1, 1)]);
 
-  final barChartVisitor = BarChartVisitor();
-  final lineGraphVisitor = LineGraphVisitor();
-
+// passing different visitors in different elements.
   chart.accept(barChartVisitor);
   chart.accept(lineGraphVisitor);
+
+  series.accept(barChartVisitor);
+  series.accept(lineGraphVisitor);
 }
