@@ -15,10 +15,8 @@ void main() async {
   scheduleMicrotask(() {
     print('in microtask');
     print('micro task');
-    Future(() {
-      loopMillionTimes('from microtask').then((_) {
-        print("returned from microtasl");
-      });
+    loopMillionTimes('from microtask').then((_) {
+      print("returned from microtasl");
     });
   });
 
