@@ -7,7 +7,7 @@ void main() async {
   Future(() {
     print('in future');
     loopMillionTimes('from future').then((_) {
-      print("returned");
+      print("returned from future");
     });
   });
 
@@ -23,7 +23,7 @@ void main() async {
   });
 
   loopMillionTimes('from main').then((_) {
-    print("returned");
+    print("returned from main");
   });
 }
 
