@@ -15,7 +15,7 @@ class UserName implements Component {
   }
 
   @override
-  void updat(FormFieldState state) {
+  void update(FormFieldState state) {
     name = state.name;
   }
 
@@ -38,7 +38,7 @@ class AcceptCheckBox implements Component {
   }
 
   @override
-  void updat(FormFieldState state) {
+  void update(FormFieldState state) {
     accepted = state.checkBoxTicked;
   }
 
@@ -59,7 +59,7 @@ class SaveButton implements Component {
   void clickSave(bool save) {}
 
   @override
-  void updat(FormFieldState state) {
+  void update(FormFieldState state) {
     active = state.saveButtonActive;
   }
 
@@ -86,7 +86,7 @@ class FormMediator implements Mediator {
   @override
   void updateObservers(FormFieldState state) {
     for (var ob in obs) {
-      ob.updat(state);
+      ob.update(state);
     }
   }
 
@@ -117,7 +117,7 @@ class FormMediator implements Mediator {
 
 // obserface interface
 abstract interface class Observer {
-  void updat(FormFieldState state);
+  void update(FormFieldState state);
 }
 
 abstract interface class Subject {

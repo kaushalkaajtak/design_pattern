@@ -98,7 +98,7 @@ void main() {
   aggregator2.addItem(1);
   aggregator2.addItem(2);
   aggregator2.addItem(3);
-  var iterator2 = aggregator.getIterator();
+  var iterator2 = aggregator2.getIterator();
 
   while (iterator2.hasNext()) {
     print(iterator2.next());
