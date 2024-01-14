@@ -25,7 +25,7 @@ class CreditCard extends PaymentStrategy {
   }
 }
 
-class ShoppingCartContext extends PaymentStrategy {
+class ShoppingCartContext {
   PaymentStrategy? _paymentStrategy;
 
   void setStrategy(PaymentStrategy strategy) {
@@ -33,7 +33,6 @@ class ShoppingCartContext extends PaymentStrategy {
     print('selectd strategy $strategy');
   }
 
-  @override
   void makePayment() {
     _paymentStrategy?.makePayment();
   }
